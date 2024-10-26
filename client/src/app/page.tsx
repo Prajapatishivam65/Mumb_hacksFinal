@@ -7,11 +7,11 @@ import {
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
-import CardExpenseSummary from "./CardExpenseSummary";
-import CardPopularProducts from "./CardPopularProducts";
-import CardPurchaseSummary from "./CardPurchaseSummary";
-import CardSalesSummary from "./CardSalesSummary";
-import StatCard from "./StatCard";
+import CardPopularProducts from "./dashboard/CardPopularProducts";
+import CardSalesSummary from "./dashboard/CardSalesSummary";
+import CardPurchaseSummary from "./dashboard/CardPurchaseSummary";
+import CardExpenseSummary from "./dashboard/CardExpenseSummary";
+import StatCard from "./dashboard/StatCard";
 
 const Dashboard = () => {
   return (
