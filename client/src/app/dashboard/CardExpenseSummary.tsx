@@ -83,7 +83,7 @@ const CardExpenseSummary = () => {
               </ResponsiveContainer>
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center basis-2/5">
                 <span className="font-bold text-xl">
-                  ₹{formattedTotalExpenses}
+                  ${formattedTotalExpenses}
                 </span>
               </div>
             </div>
@@ -112,7 +112,7 @@ const CardExpenseSummary = () => {
                   <p className="text-sm">
                     Average:{" "}
                     <span className="font-semibold">
-                      ₹{expenseSummary.totalExpenses.toFixed(2)}
+                      ${expenseSummary.totalExpenses.toFixed(2)}
                     </span>
                   </p>
                 </div>

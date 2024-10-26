@@ -1,14 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+// Define your existing interfaces for products, sales, purchases, expenses, etc.
+
 export interface Product {
   productId: string;
-  name: string;
-  price: number;
-  rating?: number;
-  stockQuantity: number;
-}
-
-export interface NewProduct {
   name: string;
   price: number;
   rating?: number;
@@ -30,38 +25,26 @@ export interface PurchaseSummary {
 }
 
 export interface ExpenseSummary {
-  expenseSummarId: string;
+  expenseSummaryId: string;
   totalExpenses: number;
   date: string;
 }
 
-export interface ExpenseByCategorySummary {
-  expenseByCategorySummaryId: string;
-  category: string;
-  amount: string;
-  date: string;
+// Define an interface for analytics data
+export interface AnalyticsMetrics {
+  topSellingProducts: Product[];
+  monthlySalesSummary: SalesSummary[];
+  yearlyPurchaseSummary: PurchaseSummary[];
+  monthlyExpenseSummary: ExpenseSummary[];
 }
 
-export interface DashboardMetrics {
-  popularProducts: Product[];
-  salesSummary: SalesSummary[];
-  purchaseSummary: PurchaseSummary[];
-  expenseSummary: ExpenseSummary[];
-  expenseByCategorySummary: ExpenseByCategorySummary[];
-}
-
-export interface User {
-  userId: string;
-  name: string;
-  email: string;
-}
-
+// Define the `api` slice with all endpoints including `analytics`
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["DashboardMetrics", "Products", "Users", "Expenses"],
+  tagTypes: ["DashboardMetrics", "Products", "Users", "Expenses", "Analytics"],
   endpoints: (build) => ({
-    getDashboardMetrics: build.query<DashboardMetrics, void>({
+    getDashboardMetrics: build.query<AnalyticsMetrics, void>({
       query: () => "/dashboard",
       providesTags: ["DashboardMetrics"],
     }),
@@ -72,7 +55,7 @@ export const api = createApi({
       }),
       providesTags: ["Products"],
     }),
-    createProduct: build.mutation<Product, NewProduct>({
+    createProduct: build.mutation<Product, Partial<Product>>({
       query: (newProduct) => ({
         url: "/products",
         method: "POST",
@@ -80,21 +63,28 @@ export const api = createApi({
       }),
       invalidatesTags: ["Products"],
     }),
-    getUsers: build.query<User[], void>({
+    getUsers: build.query<any[], void>({
       query: () => "/users",
       providesTags: ["Users"],
     }),
-    getExpensesByCategory: build.query<ExpenseByCategorySummary[], void>({
+    getExpensesByCategory: build.query<any[], void>({
       query: () => "/expenses",
       providesTags: ["Expenses"],
+    }),
+    // Analytics endpoint
+    getAnalyticsMetrics: build.query<any[], void>({
+      query: () => "/analytics",
+      providesTags: ["Analytics"],
     }),
   }),
 });
 
+// Export hooks for each endpoint
 export const {
   useGetDashboardMetricsQuery,
   useGetProductsQuery,
   useCreateProductMutation,
   useGetUsersQuery,
   useGetExpensesByCategoryQuery,
+  useGetAnalyticsMetricsQuery, // Hook for analytics
 } = api;

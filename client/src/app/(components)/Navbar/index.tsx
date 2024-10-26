@@ -1,5 +1,6 @@
 "use client";
 
+import LaptopAnalytics from "@/app/dashboard/LaptopAnalytics";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsDarkMode, setIsSidebarCollapsed } from "@/state";
 import { Bell, Menu, Moon, Settings, Sun } from "lucide-react";
@@ -76,6 +77,7 @@ const Navbar = () => {
             <span className="font-semibold">Ed Stock</span>
           </div>
         </div>
+        <LaptopAnalytics />
         <Link href="/settings">
           <Settings className="cursor-pointer text-gray-500" size={24} />
         </Link>

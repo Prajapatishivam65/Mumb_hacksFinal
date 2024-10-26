@@ -62,8 +62,8 @@ const CardSalesSummary = () => {
               <div className="text-lg font-medium">
                 <p className="text-xs text-gray-400">Value</p>
                 <span className="text-2xl font-extrabold">
-                  ₹
-                  {(totalValueSum / 100000).toLocaleString("en", {
+                  $
+                  {(totalValueSum / 1000000).toLocaleString("en", {
                     maximumFractionDigits: 2,
                   })}
                   m
